@@ -4,35 +4,117 @@
 <head>
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
-    // 👉 CHALLENGE 1
+    
+    
+    // 👉 CHALLENGE 1 to be graded
+
+    
     function profileActivation(profile, reason) {
+      if (profile.active && !reason){
+        return "confirm status manually"
+      }
+    if (profile.active && reason){
+      profile.active = false
+      profile.reason = reason
+      return profile
+    
+    }
+    if (!profile.active && profile.reason) {
+      profile.active = true
+      delete profile.reason
+      return profile
+    }
 
     }
 
     // 👉 CHALLENGE 2
+    
     function mineSweeper(grid, x, y) {
+  
+  if (x < 1 || x > 3 || y < 1 || y > 3) {
+    return "invalid coordinates";
+  }
+  
+  let cell = grid[y - 1][x - 1];
+  if (cell === "🟥") {
+    return "🟥 💀";
+  } else if (cell === "🟦") {
+    return "🟦 🥳";
+  }
 
-    }
-
+}
+  
     // 👉 CHALLENGE 3
-    function booleanize(obj) {
-
+function booleanize(obj) {
+  
+  for (let key in obj) {
+    if (key.length > 9) {
+      return "shorten all prop names to 9 chars or less";
     }
-
+  }
+  
+  for (let key in obj) {
+    if (obj[key] === 0) {
+      obj[key] = false;
+    } else if (obj[key] === 1) {
+      obj[key] = true;
+    } else if (obj[key] === null) {
+      delete obj[key];
+    }
+  }
+  return obj;
+}
     // 👉 CHALLENGE 4
-    function scrub(text, forbidden) {
+   function scrub(text, forbidden) {
+  
+  if (!text || forbidden.length === 0) return text;
 
+  
+  let words = text.split(" ");
+
+  
+  for (let a = 0; a < words.length; a++) {
+    
+    if (forbidden.indexOf(words[a]) !== -1) {
+      words[a] = "x".repeat(words[a].length);
     }
+  }
+
+  
+  return words.join(" ");
+}
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
-    function normalizePhoneNumber(num) {
+  function normalizePhoneNumber(num) {
+  
+    
+  if (typeof num !== "string" || num.length !== 10) return "invalid input";
+  for (let i = 0; i < num.length; i++) {
+    if (num[i] < "0" || num[i] > "9") return "invalid input";
+  }
+  
+  return "(" + num.slice(0,3) + ") " + num.slice(3,6) + "-" + num.slice(6);
+}
 
-    }
+
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
-    function diceRolls() {
 
+ function diceRolls() {
+  var throws = 0;
+  var sixesInARow = 0;
+  while (sixesInARow < 3) {
+    var roll = Math.floor(Math.random() * 6) + 1;
+    throws++;
+    if (roll === 6) {
+      sixesInARow++;
+    } else {
+      sixesInARow = 0;
     }
+  }
+  return throws;
+}
+
 
     // 🧪 DO NOT make any changes below this line ===================
     globalThis.challengeVersion = 1
